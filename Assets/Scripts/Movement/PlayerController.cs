@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public float mouseSensitivity;
     public bool invertX, invertY;
 
-    private bool canJump;
+    private bool canJump, canDoubleJump;
     public Transform groundCheckPoint;
     public LayerMask whatIsGround;
 
@@ -41,10 +41,21 @@ public class PlayerController : MonoBehaviour
         }
 
         canJump = Physics.OverlapSphere(groundCheckPoint.position, 0.25f, whatIsGround).Length > 0;
+
+        if (canJump)
+        {
+            canDoubleJump = false;
+        }
+
         //Handle Jumping
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             moveInput.y = jumpPower;
+            canDoubleJump = true;
+        } else if(canDoubleJump && Input.GetKeyDown(KeyCode.Space))
+        {
+            moveInput.y = jumpPower;
+            canDoubleJump = false;
         }
 
         charController.Move(moveInput * Time.deltaTime);
