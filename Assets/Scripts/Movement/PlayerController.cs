@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
     public Transform cameraTransform;
     public float mouseSensitivity;
     public bool invertX, invertY;
+
+    private bool canJump;
+    public Transform groundCheckPoint;
+    public LayerMask whatIsGround;
+
     void Update()
     {
         //moveInput.x = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
@@ -33,6 +38,13 @@ public class PlayerController : MonoBehaviour
         if (charController.isGrounded)
         {
             moveInput.y = Physics.gravity.y * gravityModifier * Time.deltaTime;
+        }
+
+        canJump = Physics.OverlapSphere(groundCheckPoint.position, 0.25f, whatIsGround).Length > 0;
+        //Handle Jumping
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        {
+            moveInput.y = jumpPower;
         }
 
         charController.Move(moveInput * Time.deltaTime);
