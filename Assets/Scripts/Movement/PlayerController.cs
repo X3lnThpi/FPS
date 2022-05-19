@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed, gravityModifier, jumpPower;
+    [SerializeField] float moveSpeed, gravityModifier, jumpPower, runSpeed = 12;
     public CharacterController charController;
 
     private Vector3 moveInput;
@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour
 
         moveInput = horiMove + vertMove;
         moveInput.Normalize(); // Normalize cause otherwise Diagonal movement will be faster slightly
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveInput = moveInput * runSpeed;
+        }
         moveInput = moveInput * moveSpeed;
 
         moveInput.y = yStore;
