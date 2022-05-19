@@ -6,6 +6,7 @@ public class BulletController : MonoBehaviour
 {
     public float moveSpeed, lifetime;
     public Rigidbody theRB;
+    public GameObject impactEffect;
 
     // Update is called once per frame
     void Update()
@@ -20,5 +21,6 @@ public class BulletController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
+        Instantiate(impactEffect, transform.position, transform.rotation);
     }
 }
