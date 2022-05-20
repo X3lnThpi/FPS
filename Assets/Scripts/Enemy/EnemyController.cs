@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class EnemyController : MonoBehaviour
     public float distanceToChase = 10f, distanceToLose = 15f;
 
     private Vector3 targetpoint;
+    public NavMeshAgent agent;
+    
 
     void Update()
     {
@@ -26,9 +29,11 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            transform.LookAt(targetpoint);
+            //transform.LookAt(targetpoint);
 
-            theRB.velocity = transform.forward * moveSpeed;
+            //theRB.velocity = transform.forward * moveSpeed;
+
+            agent.destination = targetpoint;
 
             if (Vector3.Distance(transform.position, targetpoint) > distanceToLose)
             {
