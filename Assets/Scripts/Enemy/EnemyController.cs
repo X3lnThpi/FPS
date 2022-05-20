@@ -5,8 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    public float moveSpeed;
-    public Rigidbody theRB;
+ 
     private bool chasing = false;
     public float distanceToChase = 10f, distanceToLose = 15f, distanceToStop = 2f;
 
@@ -15,6 +14,12 @@ public class EnemyController : MonoBehaviour
 
     public float keepChasingTime = 5f;
     private float chaseCounter;
+
+    public GameObject bullet;
+    public Transform firePoint;
+
+    public float fireRate;
+    private float fireCount;
 
     private void Start()
     {
@@ -31,7 +36,8 @@ public class EnemyController : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, targetpoint) < distanceToChase)
             {
-                chasing = true; Debug.Log("Distance is" + Vector3.Distance(transform.position, targetpoint));
+                chasing = true;
+                fireCount = 1f;
             }
 
             if (chaseCounter > 0)
@@ -65,6 +71,15 @@ public class EnemyController : MonoBehaviour
                 chasing = false; Debug.Log("2 ...Distance is" + Vector3.Distance(transform.position, targetpoint));
                 chaseCounter = keepChasingTime;
                 agent.destination = startPoint;
+            }
+
+            fireCount -= Time.deltaTime;
+
+            if(fireCount <= 0)
+            {
+                fireCount = fireRate;
+
+                Instantiate(bullet, firePoint.position, firePoint.rotation);
             }
         }
         } 
