@@ -10,6 +10,8 @@ public class BulletController : MonoBehaviour
 
     public int damage = 1;
 
+    public bool damageEnemy, damagePlayer;
+
     // Update is called once per frame
     void Update()
     {
@@ -22,10 +24,15 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Enemy")
+        if(other.gameObject.tag == "Enemy" && damageEnemy)
         {
             //Destroy(other.gameObject);
             other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
+        }
+
+        if(other.gameObject.tag == "Player" && damagePlayer)
+        {
+            Debug.Log("Player got hit");
         }
 
         Destroy(gameObject);
