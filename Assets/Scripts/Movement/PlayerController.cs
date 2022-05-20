@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
     [SerializeField] float moveSpeed, gravityModifier, jumpPower, runSpeed = 12;
     public CharacterController charController;
 
@@ -21,6 +23,11 @@ public class PlayerController : MonoBehaviour
 
     public GameObject bullet;
     public Transform firePoint;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Update()
     {
