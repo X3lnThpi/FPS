@@ -615,7 +615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &759960387
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -644,13 +644,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf5621b4ffc5884aa0356241d9105b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  theRB: {fileID: 759960387}
   distanceToChase: 5
   distanceToLose: 6
   distanceToStop: 2
   agent: {fileID: 759960394}
   keepChasingTime: 5
+  bullet: {fileID: 0}
+  firePoint: {fileID: 0}
+  fireRate: 0
 --- !u!65 &759960389
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1332,13 +1333,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf5621b4ffc5884aa0356241d9105b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  theRB: {fileID: 1695232045}
   distanceToChase: 5
   distanceToLose: 6
   distanceToStop: 2
   agent: {fileID: 1695232046}
   keepChasingTime: 5
+  bullet: {fileID: 0}
+  firePoint: {fileID: 0}
+  fireRate: 0
 --- !u!54 &1695232045
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1599,13 +1601,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf5621b4ffc5884aa0356241d9105b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  theRB: {fileID: 0}
   distanceToChase: 5
   distanceToLose: 6
   distanceToStop: 2
   agent: {fileID: 2005531745}
   keepChasingTime: 5
+  bullet: {fileID: 7853343397042035773, guid: c6b44803e9c0ca345a2c3b56a945f50b, type: 3}
+  firePoint: {fileID: 1255966027}
+  fireRate: 0.3
 --- !u!195 &2005531745
 NavMeshAgent:
   m_ObjectHideFlags: 0

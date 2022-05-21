@@ -18,12 +18,14 @@ public class EnemyController : MonoBehaviour
     public GameObject bullet;
     public Transform firePoint;
 
-    public float fireRate;
-    private float fireCount;
+    public float fireRate, waitBetweenShots = 2f, timeToShoot = 1f;
+    private float fireCount, shotWaitCounter, shootTimeCounter;
 
     private void Start()
     {
         startPoint = transform.position;
+        shootTimeCounter = timeToShoot;
+        shotWaitCounter = waitBetweenShots;
     }
 
     void Update()
@@ -37,7 +39,8 @@ public class EnemyController : MonoBehaviour
             if (Vector3.Distance(transform.position, targetpoint) < distanceToChase)
             {
                 chasing = true;
-                fireCount = 1f;
+                shootTimeCounter = timeToShoot;
+                shotWaitCounter = waitBetweenShots;
             }
 
             if (chaseCounter > 0)
@@ -73,14 +76,37 @@ public class EnemyController : MonoBehaviour
                 agent.destination = startPoint;
             }
 
-            fireCount -= Time.deltaTime;
-
-            if(fireCount <= 0)
+            if(shotWaitCounter > 0)
             {
-                fireCount = fireRate;
+                shotWaitCounter -= Time.deltaTime;
 
-                Instantiate(bullet, firePoint.position, firePoint.rotation);
+                if(shotWaitCounter < 0)
+                {
+                    shootTimeCounter = timeToShoot;
+                }
             }
+            else
+            {
+                shootTimeCounter -= Time.deltaTime;
+
+                if (shootTimeCounter > 0)
+                {
+                    fireCount -= Time.deltaTime;
+
+                    if (fireCount <= 0)
+                    {
+                        fireCount = fireRate;
+
+                        Instantiate(bullet, firePoint.position, firePoint.rotation);
+                    }
+                    agent.destination = transform.position;
+                }
+                else
+                {
+                    shotWaitCounter = waitBetweenShots;
+                }
+            }
+
         }
         } 
         
